@@ -8,7 +8,7 @@ class Product(models.Model):
     published = models.BooleanField(default=False)
     release_date = models.DateField()
     created = models.DateField(auto_now_add=True)
-    updated = models.DateField(auot_now=True)
+    updated = models.DateField(auto_now=True)
     price = models.CharField(max_length=10)
 
     class Meta:
@@ -21,7 +21,7 @@ class ProductImg(models.Model):
         related_name = 'gallery',
         on_delete=models.CASCADE
     )
-    image = models.ImageField(upload_to='/products/')
+    image = models.ImageField(upload_to='products/')
     alt_text = models.CharField(max_length=200, blank=True)
     order = models.PositiveIntegerField(default = 0)
 
@@ -36,7 +36,7 @@ class Contact(models.Model):
     phone_num = PhoneNumberField(blank=True)
     message = models.TextField()
     created = models.DateField(auto_now_add=True)
-    read = models.BooleanField(default=True)
+    read = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-read','-created']
