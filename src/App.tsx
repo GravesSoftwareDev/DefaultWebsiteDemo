@@ -1,0 +1,64 @@
+import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
+import Home from './pages/Customer/Home/Home.jsx'
+import Properties from './pages/Customer/Properties/Properties.jsx'
+import CustomerBase from './pages/Customer/CustomerBase.jsx'
+import PortalBase from './pages/Portal/PortalBase.jsx'
+import Login from './pages/Portal/Login/Login.jsx'
+import Dashboard from './pages/Portal/Dashboard/Dashboard.jsx'
+import Applications from './pages/Customer/Applications/Applications.jsx'
+import Contact from './pages/Customer/Contact/Contact.jsx'
+import { useEffect, useState } from 'react'
+import { fetchProducts } from './jsTools/API.js'
+
+function App() {
+  const [productsData, setProductsData] = useState({
+    data: null,
+    loading: true,
+    error: null,
+  })
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await fetchProducts()
+
+        setProductsData({
+          data,
+          loading: false,
+          error: null,
+        })
+      } catch (error) {
+        setProductsData({
+          data: null,
+          loading: false,
+          error: error.message,
+        })
+      }
+    }
+
+    loadProducts()
+  }, [])
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/Customer" element={<CustomerBase />}>
+          <Route index element={<Home propertiesData={propertiesData} />} />
+          <Route path="properties" element={<Properties propertiesData={propertiesData} />}/>
+          <Route path="contact" element={<Contact />} />
+          <Route path="applications" element={<Applications />} />
+        </Route>
+
+        <Route path="/Portal" element={<PortalBase />}>
+          <Route index element={<Login />} />
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/Customer" replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
