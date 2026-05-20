@@ -5,6 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
+    hero_image = models.ImageField(upload_to='products/')
     published = models.BooleanField(default=False)
     release_date = models.DateField()
     created = models.DateField(auto_now_add=True)

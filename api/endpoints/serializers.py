@@ -16,4 +16,4 @@ class ProductSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ['id','first_name','last_name','email','phone_num','message','read']
+        fields = ['id','first_name','last_name','email','phone_num','message']
