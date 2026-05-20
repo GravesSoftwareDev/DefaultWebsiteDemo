@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'phonenumber_field',
     'endpoints',
-    'auth',
+    'auth.apps.AuthConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,3 +126,9 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# CORS Settings
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000', # React dev server
+]
