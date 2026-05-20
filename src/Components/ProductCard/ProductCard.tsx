@@ -10,9 +10,9 @@ export default function ProductCard({
     return (
         <div className="product-cards">
             <div className="product-cards-image">
-                {product.image ? (
+                {product.hero_image ? (
                     <img
-                        src={product.image}
+                        src={product.hero_image}
                         alt={product.title}
                     />
                 ) : (
