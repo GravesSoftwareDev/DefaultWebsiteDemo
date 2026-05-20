@@ -1,6 +1,8 @@
-interface Product {
-    id: number;
-    name: string;
+type Product = {
+    id: number
+    title: string
+    description: string
+    image?: string
 }
 
 type ProductsState = {
@@ -8,6 +10,5 @@ type ProductsState = {
   loading: boolean
   error: string | null
 }
-
 
 export type { Product, ProductsState };
