@@ -6,11 +6,10 @@ import CustomerBase from './pages/Customer/CustomerBase.jsx'
 import PortalBase from './pages/Portal/PortalBase.jsx'
 import Login from './pages/Portal/Login/Login.jsx'
 import Dashboard from './pages/Portal/Dashboard/Dashboard.jsx'
-import Applications from './pages/Customer/Applications/Applications.jsx'
-import Contact from './pages/Customer/Contact/Contact.jsx'
+import Contact from './pages/Customer/Contact/Contact.tsx'
 import Product from './pages/Customer/Product/Product.tsx'
 import { useEffect, useState } from 'react'
-import { fetchProducts } from './jsTools/API.js'
+import { fetchPublishedProducts } from './jsTools/API.js'
 import type { ProductsState } from './Types'
 
 function App() {
@@ -26,7 +25,7 @@ function App() {
     }
     async function loadProducts() {
       try {
-        const data = await fetchProducts()
+        const data = await fetchPublishedProducts()
 
         setProductsData({
           data,
@@ -43,7 +42,7 @@ function App() {
     }
 
     loadProducts()
-  }, [])
+  })
 
   return (
     <BrowserRouter>
@@ -52,7 +51,6 @@ function App() {
           <Route index element={<Home productsData={productsData.data} />} />
           <Route path="products" element={<Products productsData={productsData.data} />}/>
           <Route path="contact" element={<Contact />} />
-          <Route path="applications" element={<Applications />} />
           <Route path="product/:id" element={<Product productsData={productsData.data} />} />
           <Route path="*" element={<Navigate to="/Customer" replace />} />
         </Route>

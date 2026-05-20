@@ -41,9 +41,9 @@ export default function ProductPage({ productsData }: { productsData: Product[] 
 
             <div className="product-card">
                 <div className="product-image-panel">
-                    {product.image ? (
+                    {product.hero_image ? (
                         <img
-                            src={product.image}
+                            src={product.hero_image}
                             alt={product.title}
                             className="product-image"
                         />

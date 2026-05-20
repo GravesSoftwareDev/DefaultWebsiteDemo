@@ -38,6 +38,12 @@ nav a.active {
     border-color: #555;
   }
 
+  nav a:hover,
+nav a.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
   .logo {
     filter: brightness(1.15);
   }

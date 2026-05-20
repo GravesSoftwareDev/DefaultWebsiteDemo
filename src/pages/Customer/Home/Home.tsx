@@ -1,5 +1,6 @@
 import ProductCard from '../../../Components/ProductCard/ProductCard'
 import type { Product } from '../../../Types'
+import HeroCarousel from './HeroCarousel/HeroCarousel'
 import './Home.css'
 import { Link } from 'react-router'
 
@@ -7,13 +8,18 @@ export default function Home({ productsData, }: { productsData: Product[] | null
     return (
         <div className="home-page">
             <section className="hero-section">
-                <div className="hero-overlay">
+                <div className="left-hero">
                     <h1>Welcome to Temporary Products</h1>
 
                     <p>
                         Your trusted partner in finding the perfect
                         product in Missouri.
                     </p>
+                </div>
+                <div className="right-hero">
+                    {productsData && productsData.length > 0 && (
+                        <HeroCarousel products={productsData} />
+                    )}
                 </div>
             </section>
 

@@ -66,10 +66,9 @@
 }
 
 .product-cards-content h2 {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: sans-serif;
     font-size: 18px;
     font-weight: 700;
-    font-style: italic;
     letter-spacing: 0;
     text-transform: none;
     color: var(--text-h);
