@@ -1,0 +1,89 @@
+.hero-carousel {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 16px;
+    height: 100%;
+    min-height: 340px;
+}
+
+.hero-carousel-track-outer {
+    overflow: hidden;
+    padding: 8px 0;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+}
+
+.hero-carousel-track {
+    display: flex;
+    gap: 16px;
+    padding: 0 32px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-carousel-item {
+    min-width: 220px;
+    max-width: 220px;
+    flex-shrink: 0;
+}
+
+.hero-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px 0;
+}
+
+.hero-carousel-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.hero-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: var(--border-strong);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.hero-dot.active {
+    background: var(--primary);
+    transform: scale(1.5);
+}
+
+.hero-carousel-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.hero-arr {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.hero-arr:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-border);
+    box-shadow: var(--shadow);
+}
+
+.hero-arr:disabled {
+    opacity: 0.35;
+    cursor: default;
+}

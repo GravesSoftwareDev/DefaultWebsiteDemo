@@ -1,0 +1,149 @@
+import type { Product, ProductImg, Contact } from '../Types'
+import { API_BASE } from './config'
+
+// ─── Auth helper ─────────────────────────────────────────────────────────────
+
+const authFetch = (url: string, options: RequestInit = {}): Promise<Response> => {
+    const token = localStorage.getItem('token')
+    const isFormData = options.body instanceof FormData
+    return fetch(`${API_BASE}${url}`, {
+        ...options,
+        headers: {
+            ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+            ...(token ? { Authorization: `Token ${token}` } : {}),
+            ...options.headers,
+        },
+    })
+}
+
+// ─── Public product endpoints ─────────────────────────────────────────────────
+
+const fetchProducts = async (): Promise<Product[]> => {
+    const res = await fetch(`${API_BASE}/endpoints/products/`)
+    if (!res.ok) throw new Error('Failed to fetch products')
+    return res.json()
+}
+
+const fetchProductById = async (productId: number): Promise<Product | null> => {
+    const res = await fetch(`${API_BASE}/endpoints/products/${productId}/`)
+    if (res.status === 404) return null
+    if (!res.ok) throw new Error('Failed to fetch product')
+    return res.json()
+}
+
+const fetchPublishedProducts = async (): Promise<Product[]> => {
+    return fetchProducts()
+}
+
+const searchProducts = async (searchTerm: string): Promise<Product[]> => {
+    const products = await fetchProducts()
+    const lower = searchTerm.toLowerCase()
+    return products.filter(
+        p =>
+            p.title.toLowerCase().includes(lower) ||
+            p.description.toLowerCase().includes(lower)
+    )
+}
+
+// ─── Public contact endpoint ──────────────────────────────────────────────────
+
+const submitContactForm = async (
+    contactData: Omit<Contact, 'id' | 'created' | 'read'>
+): Promise<Contact> => {
+    const res = await fetch(`${API_BASE}/endpoints/contacts/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactData),
+    })
+    if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        const messages = Object.entries(body)
+            .flatMap(([, v]) => (Array.isArray(v) ? v : [v]))
+            .join(' ')
+        throw new Error(messages || 'Failed to submit contact form.')
+    }
+    return res.json()
+}
+
+// ─── Portal gallery endpoints (authenticated) ─────────────────────────────────
+
+const fetchGalleryImages = async (productId: number): Promise<ProductImg[]> => {
+    const res = await authFetch(`/endpoints/product-images/?product=${productId}`)
+    if (!res.ok) throw new Error('Failed to fetch gallery')
+    return res.json()
+}
+
+const addGalleryImage = async (productId: number, file: File, altText = ''): Promise<ProductImg> => {
+    const data = new FormData()
+    data.append('product', String(productId))
+    data.append('image', file)
+    if (altText) data.append('alt_text', altText)
+    const res = await authFetch('/endpoints/product-images/', { method: 'POST', body: data })
+    if (!res.ok) throw new Error('Failed to add gallery image')
+    return res.json()
+}
+
+const deleteGalleryImage = async (imgId: number): Promise<void> => {
+    const res = await authFetch(`/endpoints/product-images/${imgId}/`, { method: 'DELETE' })
+    if (!res.ok) throw new Error('Failed to delete gallery image')
+}
+
+// ─── Portal product endpoints (authenticated) ─────────────────────────────────
+
+const fetchAllProducts = async (): Promise<Product[]> => {
+    const res = await authFetch('/endpoints/products/')
+    if (!res.ok) throw new Error('Failed to fetch products')
+    return res.json()
+}
+
+const createProduct = async (data: FormData): Promise<Product> => {
+    const res = await authFetch('/endpoints/products/', { method: 'POST', body: data })
+    if (!res.ok) throw new Error('Failed to create product')
+    return res.json()
+}
+
+const updateProduct = async (id: number, data: FormData): Promise<Product> => {
+    const res = await authFetch(`/endpoints/products/${id}/`, { method: 'PATCH', body: data })
+    if (!res.ok) throw new Error('Failed to update product')
+    return res.json()
+}
+
+const deleteProduct = async (id: number): Promise<void> => {
+    const res = await authFetch(`/endpoints/products/${id}/`, { method: 'DELETE' })
+    if (!res.ok) throw new Error('Failed to delete product')
+}
+
+// ─── Portal contact endpoints (authenticated) ─────────────────────────────────
+
+const fetchContacts = async (): Promise<Contact[]> => {
+    const res = await authFetch('/endpoints/contacts/')
+    if (!res.ok) throw new Error('Failed to fetch contacts')
+    return res.json()
+}
+
+const updateContact = async (id: number, data: Partial<Contact>): Promise<Contact> => {
+    const res = await authFetch(`/endpoints/contacts/${id}/`, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+    })
+    if (!res.ok) throw new Error('Failed to update contact')
+    return res.json()
+}
+
+export {
+    authFetch,
+    fetchProducts,
+    fetchProductById,
+    fetchPublishedProducts,
+    searchProducts,
+    submitContactForm,
+    fetchGalleryImages,
+    addGalleryImage,
+    deleteGalleryImage,
+    fetchAllProducts,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    fetchContacts,
+    updateContact,
+}

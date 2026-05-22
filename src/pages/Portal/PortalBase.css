@@ -1,0 +1,17 @@
+.portal-layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--surface);
+}
+
+.portal-content {
+    flex: 1;
+    min-width: 0;
+    padding: 40px 48px;
+}
+
+@media (max-width: 768px) {
+    .portal-content {
+        padding: 24px 20px;
+    }
+}
