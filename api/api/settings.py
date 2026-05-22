@@ -13,6 +13,11 @@ for _h in ['localhost', '127.0.0.1', 'healthcheck.railway.app']:
     if _h not in ALLOWED_HOSTS:
         ALLOWED_HOSTS.append(_h)
 
+# Railway automatically provides this — allows the service's own public domain
+_railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+if _railway_domain and _railway_domain not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(_railway_domain)
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
