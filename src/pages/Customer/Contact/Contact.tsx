@@ -20,6 +20,7 @@ export default function Contact() {
     const [errors, setErrors] = useState<FormErrors>({})
     const [submitting, setSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
+    const [submitError, setSubmitError] = useState('')
 
     const validate = (): FormErrors => {
         const errs: FormErrors = {}
@@ -48,6 +49,7 @@ export default function Contact() {
             return
         }
         setSubmitting(true)
+        setSubmitError('')
         try {
             await submitContactForm({
                 first_name: formData.first_name.trim(),
@@ -57,6 +59,8 @@ export default function Contact() {
                 message: formData.message.trim(),
             })
             setSubmitted(true)
+        } catch (err) {
+            setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
         } finally {
             setSubmitting(false)
         }

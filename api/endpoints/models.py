@@ -1,11 +1,10 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 # Generic Product Model
 class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    hero_image = models.ImageField(upload_to='products/')
+    hero_image = models.ImageField(upload_to='products/', blank=True, null=True)
     published = models.BooleanField(default=False)
     release_date = models.DateField()
     created = models.DateField(auto_now_add=True)
@@ -34,7 +33,7 @@ class Contact(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50, blank=True)
     email = models.EmailField()
-    phone_num = PhoneNumberField(blank=True)
+    phone_num = models.CharField(max_length=20, blank=True)
     message = models.TextField()
     created = models.DateField(auto_now_add=True)
     read = models.BooleanField(default=False)
