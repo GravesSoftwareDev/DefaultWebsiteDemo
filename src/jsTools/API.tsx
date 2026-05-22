@@ -1,5 +1,19 @@
 import type { Product, Contact } from '../Types'
 
+const authFetch = (url: string, options: RequestInit = {}): Promise<Response> => {
+    const token = localStorage.getItem('token')
+    return fetch(url, {
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Token ${token}` } : {}),
+            ...options.headers,
+        },
+    })
+}
+
+export { authFetch }
+
 const fetchProducts = async (): Promise<Product[]> => {
     const res = await fetch('/endpoints/products/')
     if (!res.ok) throw new Error('Failed to fetch products')

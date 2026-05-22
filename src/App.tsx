@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
+import { AuthProvider } from './context/AuthContext'
 import Home from './pages/Customer/Home/Home.tsx'
 import Products from './pages/Customer/Products/Products.tsx'
 import CustomerBase from './pages/Customer/CustomerBase.jsx'
@@ -42,24 +43,26 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/Customer" element={<CustomerBase />}>
-          <Route index element={<Home productsData={productsData.data} />} />
-          <Route path="products" element={<Products productsData={productsData.data} />}/>
-          <Route path="contact" element={<Contact />} />
-          <Route path="product/:id" element={<Product productsData={productsData.data} />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/Customer" element={<CustomerBase />}>
+            <Route index element={<Home productsData={productsData.data} />} />
+            <Route path="products" element={<Products productsData={productsData.data} />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="product/:id" element={<Product productsData={productsData.data} />} />
+            <Route path="*" element={<Navigate to="/Customer" replace />} />
+          </Route>
+
+          <Route path="/Portal" element={<Login />} />
+          <Route path="/Portal" element={<PortalBase />}>
+            <Route path="dashboard" element={<Dashboard />} />
+          </Route>
+
           <Route path="*" element={<Navigate to="/Customer" replace />} />
-        </Route>
-
-        <Route path="/Portal" element={<PortalBase />}>
-          <Route index element={<Login />} />
-          <Route path="dashboard" element={<Dashboard />} />
-        </Route>
-
-        <Route path="*" element={<Navigate to="/Customer" replace />} />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
