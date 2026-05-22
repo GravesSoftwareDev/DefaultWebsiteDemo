@@ -20,9 +20,6 @@ function App() {
   })
 
   useEffect(() => {
-    if(productsData.data || productsData.error) {
-      return
-    }
     async function loadProducts() {
       try {
         const data = await fetchPublishedProducts()
@@ -36,13 +33,13 @@ function App() {
         setProductsData({
           data: null,
           loading: false,
-          error: error.message,
+          error: error instanceof Error ? error.message : 'Unknown error',
         })
       }
     }
 
     loadProducts()
-  })
+  }, [])
 
   return (
     <BrowserRouter>

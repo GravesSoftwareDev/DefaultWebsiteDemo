@@ -9,10 +9,10 @@ export default function CustomerFooter() {
                 <div className="footer-main">
                     <div className="footer-brand">
                         <div className="footer-brand-name">
-                            Temporary <span>Products</span>
+                            Demo <span>Store</span>
                         </div>
                         <p>
-                            Your trusted partner in finding the things that they are.
+                            Your one-stop shop for quality products.
                         </p>
                         <div className="footer-contact-item">
                             <span>Phone</span>
@@ -66,7 +66,7 @@ export default function CustomerFooter() {
                             <p>
                                 123 street St
                                 <br />
-                                Springfield, MO 12345
+                                Anytown, USA 12345
                             </p>
                         </div>
                         <div className="footer-contact-item">
@@ -83,7 +83,7 @@ export default function CustomerFooter() {
                 <div className="footer-bottom">
                     <div className="footer-bottom-copy">
                         &copy; {new Date().getFullYear()}{' '}
-                        <span>Temporary Products</span>. All rights reserved.
+                        <span>Demo Store</span>. All rights reserved.
                     </div>
                 </div>
             </footer>

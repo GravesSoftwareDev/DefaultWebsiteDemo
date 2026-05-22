@@ -130,5 +130,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # CORS Settings
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000', # React dev server
+    'http://localhost:5173',
 ]

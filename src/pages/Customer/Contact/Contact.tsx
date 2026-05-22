@@ -1,31 +1,7 @@
 import { useState } from 'react'
 import './Contact.css'
-
-export type Contact = {
-    id: number
-    first_name: string
-    last_name?: string
-    email: string
-    phone_num?: string
-    message: string
-    created: string
-    read: boolean
-}
-
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
-const submitContactForm = async (
-    contactData: Omit<Contact, 'id' | 'created' | 'read'>
-): Promise<Contact> => {
-    await delay(1000)
-
-    return {
-        id: Math.floor(Math.random() * 10000),
-        created: new Date().toISOString(),
-        read: false,
-        ...contactData,
-    }
-}
+import type { Contact } from '../../../Types'
+import { submitContactForm } from '../../../jsTools/API'
 
 type FormErrors = {
     first_name?: string
@@ -91,8 +67,8 @@ export default function Contact() {
             <section className="contact-hero">
                 <h1>Contact Us</h1>
                 <p>
-                    Have a question about a property or want to schedule a
-                    viewing? We'd love to hear from you.
+                    Have a question or want to get in touch?
+                    We'd love to hear from you.
                 </p>
             </section>
 
@@ -218,7 +194,7 @@ export default function Contact() {
                         <p>
                             123 street st
                             <br />
-                            Springfield, MO 12345
+                            Anytown, USA 12345
                         </p>
                     </div>
 

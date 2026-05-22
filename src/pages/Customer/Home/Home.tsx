@@ -9,11 +9,11 @@ export default function Home({ productsData, }: { productsData: Product[] | null
         <div className="home-page">
             <section className="hero-section">
                 <div className="left-hero">
-                    <h1>Welcome to Temporary Products</h1>
+                    <h1>Welcome to Demo Store</h1>
 
                     <p>
-                        Your trusted partner in finding the perfect
-                        product in Missouri.
+                        Your one-stop shop for finding the perfect
+                        product.
                     </p>
                 </div>
                 <div className="right-hero">
@@ -40,8 +40,8 @@ export default function Home({ productsData, }: { productsData: Product[] | null
                                 <h3>Click Here To See More Products!</h3>
 
                                 <p>
-                                    Browse all available rentals and find the
-                                    perfect place for your next home.
+                                    Browse our full catalog and find exactly
+                                    what you're looking for.
                                 </p>
                             </div>
                         </Link>

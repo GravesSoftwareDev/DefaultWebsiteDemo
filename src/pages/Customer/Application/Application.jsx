@@ -2,7 +2,7 @@ export default function Application() {
   return (
     <div>
       <h1>Application Page</h1>
-      <p>This is where users can apply for properties.</p>
+      <p>This is where users can submit an application.</p>
     </div>
   )
 }

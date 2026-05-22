@@ -5,7 +5,7 @@ export default function Login() {
         <div>
             <h1>Login Page</h1>
             <p>This is where users can log in to their accounts.</p>
-            <Link to="/properties/dashboard">Go to Dashboard</Link>
+            <Link to="/Portal/dashboard">Go to Dashboard</Link>
         </div>
     )
 }
