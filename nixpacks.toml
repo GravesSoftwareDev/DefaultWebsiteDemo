@@ -1,5 +1,2 @@
-[variables]
-NPM_CONFIG_PRODUCTION = "false"
-
 [phases.install]
-cmds = ["npm install --include=dev"]
+cmds = ["NODE_ENV=development NPM_CONFIG_PRODUCTION=false npm install"]
