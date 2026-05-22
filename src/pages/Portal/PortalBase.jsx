@@ -1,6 +1,7 @@
 import PortalNav from '../../Components/NavBars/PortalNav/PortalNav'
 import { Navigate, Outlet } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
+import './PortalBase.css'
 
 export default function PortalBase() {
     const { token, loading } = useAuth()
@@ -9,9 +10,11 @@ export default function PortalBase() {
     if (!token) return <Navigate to="/Portal" replace />
 
     return (
-        <div>
+        <div className="portal-layout">
             <PortalNav />
-            <Outlet />
+            <main className="portal-content">
+                <Outlet />
+            </main>
         </div>
     )
 }

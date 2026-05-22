@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
 import { useNavigate } from 'react-router'
+import './Login.css'
 
 export default function Login() {
     const { login, token } = useAuth()
@@ -30,34 +31,45 @@ export default function Login() {
     }
 
     return (
-        <div>
-            <h1>Portal Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input
-                        id="username"
-                        type="text"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                        required
-                    />
+        <div className="login-page">
+            <div className="login-card">
+                <div className="login-brand">
+                    Demo <span>Store</span>
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        id="password"
-                        type="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                {error && <p>{error}</p>}
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Signing in…' : 'Sign In'}
-                </button>
-            </form>
+                <p className="login-subtitle">Client Portal</p>
+
+                <h1>Sign in</h1>
+
+                <form onSubmit={handleSubmit}>
+                    <div className="login-field">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            placeholder="Enter your username"
+                            required
+                            autoFocus
+                        />
+                    </div>
+                    <div className="login-field">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            placeholder="Enter your password"
+                            required
+                        />
+                    </div>
+                    {error && <p className="login-error">{error}</p>}
+                    <button type="submit" className="login-submit" disabled={loading}>
+                        {loading ? 'Signing in…' : 'Sign In'}
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }

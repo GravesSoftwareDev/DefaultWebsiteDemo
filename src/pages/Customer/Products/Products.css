@@ -1,7 +1,7 @@
 .products-page {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px 64px;
+    padding: 0 40px 80px;
 }
 
 .products-header {
@@ -9,21 +9,19 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 16px;
+    padding: 40px 0 20px;
     margin-bottom: 32px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 16px;
 }
 
 .products-header h1 {
-    margin: 0 0 6px;
+    margin: 0 0 4px;
 }
 
 .products-count {
     font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--border);
+    font-weight: 500;
+    color: var(--text-muted);
 }
 
 .products-grid {
@@ -33,13 +31,10 @@
 }
 
 .products-state {
-    padding: 64px 0;
+    padding: 80px 0;
     text-align: center;
-    color: var(--border);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    color: var(--text-muted);
+    font-size: 15px;
 }
 
 .products-sort-wrapper {
@@ -49,38 +44,40 @@
 }
 
 .products-sort-wrapper label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--border);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
 }
 
 .products-sort {
     min-width: 180px;
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 10px 36px 10px 14px;
-    background: var(--background);
-    color: inherit;
+    padding: 9px 36px 9px 16px;
+    background: var(--bg);
+    color: var(--text-h);
     font: inherit;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
 }
 
 .products-sort:focus {
-    outline: 2px solid currentColor;
+    outline: 2px solid var(--primary-border);
     outline-offset: 2px;
+    border-color: var(--primary);
 }
 
 @media (max-width: 1024px) {
     .products-page {
-        padding: 0 20px 48px;
-    }
-
-    .products-grid {
-        gap: 16px;
+        padding: 0 24px 60px;
     }
 }
 
@@ -88,6 +85,7 @@
     .products-header {
         align-items: stretch;
         flex-direction: column;
+        padding: 28px 0 16px;
     }
 
     .products-sort-wrapper {
@@ -100,7 +98,7 @@
 
     .products-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 14px;
     }
 }
 

@@ -15,6 +15,10 @@ export default function Home({ productsData, }: { productsData: Product[] | null
                         Your one-stop shop for finding the perfect
                         product.
                     </p>
+
+                    <Link to="/Customer/products" className="hero-cta">
+                        Shop Now →
+                    </Link>
                 </div>
                 <div className="right-hero">
                     {productsData && productsData.length > 0 && (
@@ -37,13 +41,13 @@ export default function Home({ productsData, }: { productsData: Product[] | null
 
                         <Link to="/Customer/Products" className="see-more-card">
                             <div className="see-more-content">
-                                <h3>Click Here To See More Products!</h3>
-
+                                <h3>See All Products</h3>
                                 <p>
                                     Browse our full catalog and find exactly
                                     what you're looking for.
                                 </p>
                             </div>
+                            <span className="see-more-arrow">→</span>
                         </Link>
                     </div>
                 ) : (

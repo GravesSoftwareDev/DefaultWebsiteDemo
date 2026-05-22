@@ -1,68 +1,64 @@
-nav {
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 24px;
-  font-family: var(--sans);
+.customer-nav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
 }
 
-.logo {
-  height: 54px;
-  width: auto;
-  margin-right: 28px;
-  object-fit: contain;
+.nav-brand {
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--text-h);
+    text-decoration: none;
+    letter-spacing: -0.04em;
 }
 
-nav a {
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 18px;
-  padding: 14px 22px;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+.nav-brand span {
+    color: var(--primary);
 }
 
-nav a:hover,
-nav a.active {
-  background: var(--accent);
-  color: #fff;
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-  nav {
-    background: #303030;
-    border-color: #555;
-  }
-
-  nav a:hover,
-nav a.active {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  .logo {
-    filter: brightness(1.15);
-  }
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, background 0.15s;
 }
 
-@media (max-width: 768px) {
-  nav {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    padding: 12px;
-  }
+.nav-links a:hover {
+    color: var(--text-h);
+    background: var(--surface);
+}
 
-  .logo {
-    height: 44px;
-    margin-right: 12px;
-  }
+.nav-links a.active {
+    color: var(--primary);
+    background: var(--primary-light);
+    font-weight: 600;
+}
 
-  nav a {
-    font-size: 16px;
-    padding: 10px 14px;
-  }
+@media (max-width: 640px) {
+    .customer-nav {
+        padding: 0 20px;
+        height: 56px;
+    }
+
+    .nav-links a {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
 }

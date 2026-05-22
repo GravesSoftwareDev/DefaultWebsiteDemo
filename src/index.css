@@ -1,50 +1,99 @@
 :root {
-  --text: #555;
-  --text-h: #333;
-  --bg: #fff;
-  --border: #aaa;
-  --code-bg: #f3f3f3;
-
-  --accent: #900;
-  --accent-bg: #900;
-  --accent-border: #7a0000;
-
-  --social-bg: #eee;
-  --shadow: none;
-
-  --sans: Arial, Helvetica, sans-serif;
-  --heading: Arial, Helvetica, sans-serif;
-  --mono: Consolas, ui-monospace, monospace;
-
-  font: 16px/145% var(--sans);
-  letter-spacing: 0;
   color-scheme: light;
+
+  /* Primary */
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  --primary-light: #EEF2FF;
+  --primary-border: #C7D2FE;
+
+  /* Text */
+  --text: #374151;
+  --text-h: #111827;
+  --text-muted: #6B7280;
+  --text-subtle: #9CA3AF;
+
+  /* Surfaces */
+  --bg: #FFFFFF;
+  --surface: #F9FAFB;
+  --surface-2: #F3F4F6;
+  --border: #E5E7EB;
+  --border-strong: #D1D5DB;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+
+  /* Semantic: errors & success */
+  --color-error: #DC2626;
+  --error-bg: #FEF2F2;
+  --error-border: #FECACA;
+  --color-success: #059669;
+  --color-success-bg: #D1FAE5;
+
+  /* Typography */
+  --sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --heading: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace;
+
+  /* Backward-compat aliases */
+  --accent: var(--primary);
+  --accent-bg: var(--primary);
+  --accent-border: var(--primary-hover);
+  --code-bg: var(--surface);
+
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--text);
   background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 15px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #ddd;
-    --text-h: #fff;
-    --bg: #303030;
-    --border: #555;
-    --code-bg: #252525;
+    color-scheme: dark;
 
-    --accent: #9a1111;
-    --accent-bg: #8d0f0f;
-    --accent-border: #b33;
+    --primary: #6366F1;
+    --primary-hover: #4F46E5;
+    --primary-light: rgba(99, 102, 241, 0.15);
+    --primary-border: rgba(99, 102, 241, 0.35);
 
-    --social-bg: #3a3a3a;
+    --text: #CBD5E1;
+    --text-h: #F1F5F9;
+    --text-muted: #94A3B8;
+    --text-subtle: #64748B;
+
+    --bg: #0F172A;
+    --surface: #1E293B;
+    --surface-2: #334155;
+    --border: #334155;
+    --border-strong: #475569;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+
+    --color-error: #F87171;
+    --error-bg: rgba(239, 68, 68, 0.1);
+    --error-border: rgba(239, 68, 68, 0.25);
+
+    --color-success: #34D399;
+    --color-success-bg: rgba(16, 185, 129, 0.12);
   }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body {
@@ -52,52 +101,50 @@ body {
   background: var(--bg);
 }
 
-h1,
-h2 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading);
-  font-weight: 400;
+  font-weight: 700;
   color: var(--text-h);
-  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-transform: none;
 }
 
 h1 {
-  font-size: 42px;
-  line-height: 1.1;
-  letter-spacing: -1px;
-  margin: 36px 0 24px;
-
-  @media (max-width: 1024px) {
-    font-size: 32px;
-    margin: 24px 0 16px;
-  }
+  font-size: clamp(28px, 4vw, 44px);
+  margin: 0 0 16px;
 }
 
 h2 {
-  font-size: 24px;
-  line-height: 120%;
-  letter-spacing: -0.25px;
+  font-size: 22px;
+  letter-spacing: -0.02em;
   margin: 0 0 10px;
-  color: #666;
-
-  @media (max-width: 1024px) {
-    font-size: 21px;
-  }
+  color: var(--text-h);
 }
 
 p {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
+  line-height: 1.6;
 }
 
 a {
-  color: var(--accent);
+  color: var(--primary);
 }
 
-button,
-.button,
-input[type='submit'] {
-  background: var(--accent-bg);
-  color: #fff;
-  border: 1px solid var(--accent-border);
-  border-radius: 6px;
-  font-weight: 700;
+button, input[type='submit'] {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+input, textarea, select {
+  font-family: var(--sans);
 }
