@@ -1,11 +1,12 @@
 import type { Product, ProductImg, Contact } from '../Types'
+import { API_BASE } from './config'
 
 // ─── Auth helper ─────────────────────────────────────────────────────────────
 
 const authFetch = (url: string, options: RequestInit = {}): Promise<Response> => {
     const token = localStorage.getItem('token')
     const isFormData = options.body instanceof FormData
-    return fetch(url, {
+    return fetch(`${API_BASE}${url}`, {
         ...options,
         headers: {
             ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
@@ -18,13 +19,13 @@ const authFetch = (url: string, options: RequestInit = {}): Promise<Response> =>
 // ─── Public product endpoints ─────────────────────────────────────────────────
 
 const fetchProducts = async (): Promise<Product[]> => {
-    const res = await fetch('/endpoints/products/')
+    const res = await fetch(`${API_BASE}/endpoints/products/`)
     if (!res.ok) throw new Error('Failed to fetch products')
     return res.json()
 }
 
 const fetchProductById = async (productId: number): Promise<Product | null> => {
-    const res = await fetch(`/endpoints/products/${productId}/`)
+    const res = await fetch(`${API_BASE}/endpoints/products/${productId}/`)
     if (res.status === 404) return null
     if (!res.ok) throw new Error('Failed to fetch product')
     return res.json()
@@ -49,7 +50,7 @@ const searchProducts = async (searchTerm: string): Promise<Product[]> => {
 const submitContactForm = async (
     contactData: Omit<Contact, 'id' | 'created' | 'read'>
 ): Promise<Contact> => {
-    const res = await fetch('/endpoints/contacts/', {
+    const res = await fetch(`${API_BASE}/endpoints/contacts/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(contactData),
@@ -136,13 +137,13 @@ export {
     fetchPublishedProducts,
     searchProducts,
     submitContactForm,
+    fetchGalleryImages,
+    addGalleryImage,
+    deleteGalleryImage,
     fetchAllProducts,
     createProduct,
     updateProduct,
     deleteProduct,
-    fetchGalleryImages,
-    addGalleryImage,
-    deleteGalleryImage,
     fetchContacts,
     updateContact,
 }

@@ -5,7 +5,6 @@ __pycache__/
 *.pyd
 *.egg
 *.egg-info/
-dist/
 build/
 .eggs/
 
@@ -14,10 +13,13 @@ venv/
 .venv/
 env/
 
+# Node
+node_modules/
+dist/
+
 # Django
 *.log
 db.sqlite3
-media/
 staticfiles/
 local_settings.py
 

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { API_BASE } from '../jsTools/config'
 
 type User = {
     id: number
@@ -26,7 +27,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setLoading(false)
             return
         }
-        fetch('/auth/user/', {
+        fetch(`${API_BASE}/auth/user/`, {
             headers: { Authorization: `Token ${token}` },
         })
             .then(res => {
@@ -42,7 +43,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, [])
 
     const login = async (username: string, password: string) => {
-        const res = await fetch('/auth/login/', {
+        const res = await fetch(`${API_BASE}/auth/login/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
@@ -50,7 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (!res.ok) throw new Error('Invalid username or password.')
         const { token: newToken } = await res.json()
 
-        const userRes = await fetch('/auth/user/', {
+        const userRes = await fetch(`${API_BASE}/auth/user/`, {
             headers: { Authorization: `Token ${newToken}` },
         })
         const userData = await userRes.json()
@@ -62,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const logout = async () => {
         if (token) {
-            await fetch('/auth/logout/', {
+            await fetch(`${API_BASE}/auth/logout/`, {
                 method: 'POST',
                 headers: { Authorization: `Token ${token}` },
             }).catch(() => {})
