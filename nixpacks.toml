@@ -2,4 +2,4 @@
 NPM_CONFIG_PRODUCTION = "false"
 
 [phases.install]
-cmds = ["npm install"]
+cmds = ["npm install --include=dev"]
