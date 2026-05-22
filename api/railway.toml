@@ -3,6 +3,6 @@ builder = "nixpacks"
 buildCommand = "pip install -r requirements.txt && python manage.py collectstatic --noinput"
 
 [deploy]
-startCommand = "python manage.py migrate --noinput && python manage.py createsuperuser --noinput || true && gunicorn api.wsgi:application --bind 0.0.0.0:$PORT --workers 2"
+startCommand = "python manage.py migrate --noinput && python manage.py loaddata fixtures/seed_data.json || true && python manage.py createsuperuser --noinput || true && gunicorn api.wsgi:application --bind 0.0.0.0:$PORT --workers 2"
 healthcheckPath = "/endpoints/products/"
 restartPolicyType = "on_failure"

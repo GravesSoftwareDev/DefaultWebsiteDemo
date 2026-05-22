@@ -1,0 +1,206 @@
+[
+{
+  "model": "endpoints.product",
+  "pk": 1,
+  "fields": {
+    "title": "ProBook Laptop 15",
+    "description": "A powerful and lightweight 15-inch laptop built for productivity. Features a crisp Full HD display, fast SSD storage, and all-day battery life — perfect for work, school, or creative projects.",
+    "hero_image": "products/laptop.jpg",
+    "published": true,
+    "release_date": "2024-03-01",
+    "created": "2026-05-22",
+    "updated": "2026-05-22",
+    "price": "1,299.99"
+  }
+},
+{
+  "model": "endpoints.product",
+  "pk": 2,
+  "fields": {
+    "title": "AirPod Pro Wireless Earbuds",
+    "description": "True wireless earbuds with active noise cancellation, crystal-clear audio, and a secure fit for all-day wear. Up to 28 hours of total battery life with the charging case.",
+    "hero_image": "products/earbuds.jpg",
+    "published": true,
+    "release_date": "2024-01-15",
+    "created": "2026-05-22",
+    "updated": "2026-05-22",
+    "price": "179.99"
+  }
+},
+{
+  "model": "endpoints.product",
+  "pk": 3,
+  "fields": {
+    "title": "Meridian Chronograph Watch",
+    "description": "A classic stainless steel chronograph watch with a sapphire crystal face and leather strap. Water-resistant to 50 meters. Timeless design that works for every occasion.",
+    "hero_image": "products/watch.jpg",
+    "published": true,
+    "release_date": "2023-11-10",
+    "created": "2026-05-22",
+    "updated": "2026-05-22",
+    "price": "349.00"
+  }
+},
+{
+  "model": "endpoints.product",
+  "pk": 4,
+  "fields": {
+    "title": "Stride Runner Sneakers",
+    "description": "Lightweight performance sneakers with responsive cushioning and breathable mesh upper. Engineered for runners who demand comfort without sacrificing style.",
+    "hero_image": "products/sneakers.jpg",
+    "published": true,
+    "release_date": "2024-02-20",
+    "created": "2026-05-22",
+    "updated": "2026-05-22",
+    "price": "129.95"
+  }
+},
+{
+  "model": "endpoints.product",
+  "pk": 5,
+  "fields": {
+    "title": "Coastal Polarized Sunglasses",
+    "description": "UV400 polarized lenses in a lightweight acetate frame. Reduces glare for driving and outdoor activities while keeping your look sharp all summer long.",
+    "hero_image": "products/sunglasses.jpg",
+    "published": true,
+    "release_date": "2024-04-05",
+    "created": "2026-05-22",
+    "updated": "2026-05-22",
+    "price": "89.00"
+  }
+},
+{
+  "model": "endpoints.product",
+  "pk": 6,
+  "fields": {
+    "title": "Studio Pro Headphones",
+    "description": "Over-ear studio headphones with 40mm drivers, deep bass response, and a foldable design for easy portability. Wired and Bluetooth modes included.",
+    "hero_image": "products/headphones.jpg",
+    "published": true,
+    "release_date": "2024-01-30",
+    "created": "2026-05-22",
+    "updated": "2026-05-22",
+    "price": "249.99"
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 1,
+  "fields": {
+    "product": 1,
+    "image": "products/gallery_laptop_1.jpg",
+    "alt_text": "ProBook in use",
+    "order": 1
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 2,
+  "fields": {
+    "product": 1,
+    "image": "products/gallery_laptop_2.jpg",
+    "alt_text": "ProBook keyboard glow",
+    "order": 2
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 3,
+  "fields": {
+    "product": 2,
+    "image": "products/gallery_earbuds_1.jpg",
+    "alt_text": "AirPods Pro with case",
+    "order": 1
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 4,
+  "fields": {
+    "product": 2,
+    "image": "products/gallery_earbuds_2.jpg",
+    "alt_text": "AirPods on marble",
+    "order": 2
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 5,
+  "fields": {
+    "product": 3,
+    "image": "products/gallery_watch_1.jpg",
+    "alt_text": "Meridian face close-up",
+    "order": 1
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 6,
+  "fields": {
+    "product": 3,
+    "image": "products/gallery_watch_2.jpg",
+    "alt_text": "Meridian leather strap",
+    "order": 2
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 7,
+  "fields": {
+    "product": 4,
+    "image": "products/gallery_sneakers_1.jpg",
+    "alt_text": "Stride Runner side view",
+    "order": 1
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 8,
+  "fields": {
+    "product": 4,
+    "image": "products/gallery_sneakers_2.jpg",
+    "alt_text": "Stride Runner sole detail",
+    "order": 2
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 9,
+  "fields": {
+    "product": 5,
+    "image": "products/gallery_sunglasses_1.jpg",
+    "alt_text": "Coastal round lens detail",
+    "order": 1
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 10,
+  "fields": {
+    "product": 5,
+    "image": "products/gallery_sunglasses_2.jpg",
+    "alt_text": "Coastal lifestyle shot",
+    "order": 2
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 11,
+  "fields": {
+    "product": 6,
+    "image": "products/gallery_headphones_1.jpg",
+    "alt_text": "Studio Pro white variant",
+    "order": 1
+  }
+},
+{
+  "model": "endpoints.productimg",
+  "pk": 12,
+  "fields": {
+    "product": 6,
+    "image": "products/gallery_headphones_2.jpg",
+    "alt_text": "Studio Pro black detail",
+    "order": 2
+  }
+}
+]
