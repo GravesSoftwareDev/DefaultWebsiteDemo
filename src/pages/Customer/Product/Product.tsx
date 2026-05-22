@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, Link } from 'react-router';
 import type { Product } from '../../../Types.tsx';
 import './Product.css';
@@ -5,6 +6,7 @@ import './Product.css';
 export default function ProductPage({ productsData }: { productsData: Product[] | null }) {
     const { id } = useParams<{ id: string }>();
     const productId = Number(id);
+    const [activeImage, setActiveImage] = useState<string | null>(null)
 
     if (productsData === null) {
         return (
@@ -31,6 +33,12 @@ export default function ProductPage({ productsData }: { productsData: Product[] 
         );
     }
 
+    const thumbnails = [
+        ...(product.hero_image ? [{ src: product.hero_image, alt: product.title }] : []),
+        ...product.gallery.map(img => ({ src: img.image, alt: img.alt_text || product.title })),
+    ]
+    const displaySrc = activeImage ?? thumbnails[0]?.src ?? null
+
     return (
         <div className="product-wrapper">
             <nav className="product-breadcrumb">
@@ -41,9 +49,9 @@ export default function ProductPage({ productsData }: { productsData: Product[] 
 
             <div className="product-card">
                 <div className="product-image-panel">
-                    {product.hero_image ? (
+                    {displaySrc ? (
                         <img
-                            src={product.hero_image}
+                            src={displaySrc}
                             alt={product.title}
                             className="product-image"
                         />
@@ -57,7 +65,20 @@ export default function ProductPage({ productsData }: { productsData: Product[] 
                             <span className="product-image-placeholder-text">No image available</span>
                         </div>
                     )}
-                    <div className="product-id-badge">#{product.id}</div>
+                    {thumbnails.length > 1 && (
+                        <div className="product-thumbnails">
+                            {thumbnails.map((t, i) => (
+                                <button
+                                    key={i}
+                                    className={`product-thumb${(activeImage ?? thumbnails[0].src) === t.src ? ' active' : ''}`}
+                                    onClick={() => setActiveImage(t.src)}
+                                    aria-label={`View image ${i + 1}`}
+                                >
+                                    <img src={t.src} alt={t.alt} />
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <div className="product-content-panel">

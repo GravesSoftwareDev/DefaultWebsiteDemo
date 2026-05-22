@@ -10,7 +10,8 @@ phone_validator = RegexValidator(
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImg
-        fields = ['id','image','alt_text','order']
+        fields = ['id','product','image','alt_text','order']
+        read_only_fields = ['id']
 
 class ProductSerializer(serializers.ModelSerializer):
     gallery = ProductImageSerializer(many=True, read_only=True)

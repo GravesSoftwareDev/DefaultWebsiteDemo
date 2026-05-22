@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { createProduct, updateProduct } from '../../../jsTools/API'
+import { useState, useRef } from 'react'
+import { createProduct, updateProduct, addGalleryImage, deleteGalleryImage } from '../../../jsTools/API'
 
 export default function ProductForm({ product, onSave, onCancel }) {
     const isEditing = product !== null
@@ -12,12 +12,41 @@ export default function ProductForm({ product, onSave, onCancel }) {
         release_date: product?.release_date ?? '',
     })
     const [imageFile, setImageFile] = useState(null)
+    const [gallery, setGallery] = useState(product?.gallery ?? [])
+    const [galleryUploading, setGalleryUploading] = useState(false)
     const [saving, setSaving] = useState(false)
     const [error, setError] = useState('')
+    const galleryInputRef = useRef(null)
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target
         setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
+    }
+
+    const handleGalleryAdd = async (e) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        setGalleryUploading(true)
+        setError('')
+        try {
+            const newImg = await addGalleryImage(product.id, file)
+            setGallery(prev => [...prev, newImg])
+        } catch (e) {
+            setError(e.message)
+        } finally {
+            setGalleryUploading(false)
+            if (galleryInputRef.current) galleryInputRef.current.value = ''
+        }
+    }
+
+    const handleGalleryDelete = async (imgId) => {
+        setError('')
+        try {
+            await deleteGalleryImage(imgId)
+            setGallery(prev => prev.filter(img => img.id !== imgId))
+        } catch (e) {
+            setError(e.message)
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -106,7 +135,7 @@ export default function ProductForm({ product, onSave, onCancel }) {
                     </div>
 
                     <div className="modal-field">
-                        <label>Image</label>
+                        <label>Hero Image</label>
                         {product?.hero_image && !imageFile && (
                             <img src={product.hero_image} alt="Current" className="current-image" />
                         )}
@@ -119,6 +148,39 @@ export default function ProductForm({ product, onSave, onCancel }) {
                             <span className="field-hint">Leave blank to keep the current image.</span>
                         )}
                     </div>
+
+                    {isEditing && (
+                        <div className="modal-field">
+                            <label>Gallery Images</label>
+                            {gallery.length > 0 && (
+                                <div className="gallery-grid">
+                                    {gallery.map(img => (
+                                        <div key={img.id} className="gallery-item">
+                                            <img src={img.image} alt={img.alt_text || 'Gallery image'} />
+                                            <button
+                                                type="button"
+                                                className="gallery-item-delete"
+                                                onClick={() => handleGalleryDelete(img.id)}
+                                                aria-label="Remove image"
+                                            >
+                                                ✕
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            <input
+                                ref={galleryInputRef}
+                                type="file"
+                                accept="image/*"
+                                onChange={handleGalleryAdd}
+                                disabled={galleryUploading}
+                            />
+                            <span className="field-hint">
+                                {galleryUploading ? 'Uploading…' : 'Select a file to add it to the gallery immediately.'}
+                            </span>
+                        </div>
+                    )}
 
                     <div className="modal-field modal-toggle-field">
                         <label className="toggle-label">

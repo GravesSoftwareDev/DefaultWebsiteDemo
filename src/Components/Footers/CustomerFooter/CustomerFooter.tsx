@@ -85,6 +85,9 @@ export default function CustomerFooter() {
                         &copy; {new Date().getFullYear()}{' '}
                         <span>Demo Store</span>. All rights reserved.
                     </div>
+                    <div className="footer-bottom-credit">
+                        This demo was created by Geoffrey Wortham and Shanna Graves
+                    </div>
                 </div>
             </footer>
         </>

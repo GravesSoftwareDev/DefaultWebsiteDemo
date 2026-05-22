@@ -1,4 +1,4 @@
-import type { Product, Contact } from '../Types'
+import type { Product, ProductImg, Contact } from '../Types'
 
 // ─── Auth helper ─────────────────────────────────────────────────────────────
 
@@ -64,6 +64,29 @@ const submitContactForm = async (
     return res.json()
 }
 
+// ─── Portal gallery endpoints (authenticated) ─────────────────────────────────
+
+const fetchGalleryImages = async (productId: number): Promise<ProductImg[]> => {
+    const res = await authFetch(`/endpoints/product-images/?product=${productId}`)
+    if (!res.ok) throw new Error('Failed to fetch gallery')
+    return res.json()
+}
+
+const addGalleryImage = async (productId: number, file: File, altText = ''): Promise<ProductImg> => {
+    const data = new FormData()
+    data.append('product', String(productId))
+    data.append('image', file)
+    if (altText) data.append('alt_text', altText)
+    const res = await authFetch('/endpoints/product-images/', { method: 'POST', body: data })
+    if (!res.ok) throw new Error('Failed to add gallery image')
+    return res.json()
+}
+
+const deleteGalleryImage = async (imgId: number): Promise<void> => {
+    const res = await authFetch(`/endpoints/product-images/${imgId}/`, { method: 'DELETE' })
+    if (!res.ok) throw new Error('Failed to delete gallery image')
+}
+
 // ─── Portal product endpoints (authenticated) ─────────────────────────────────
 
 const fetchAllProducts = async (): Promise<Product[]> => {
@@ -117,6 +140,9 @@ export {
     createProduct,
     updateProduct,
     deleteProduct,
+    fetchGalleryImages,
+    addGalleryImage,
+    deleteGalleryImage,
     fetchContacts,
     updateContact,
 }
