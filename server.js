@@ -14,11 +14,13 @@ if (API_URL) {
     const proxy = createProxyMiddleware({
         target: API_URL,
         changeOrigin: true,
-        pathRewrite: { '^': '' },
     })
-    app.use('/endpoints', proxy)
-    app.use('/auth', proxy)
-    app.use('/media', proxy)
+    app.use((req, res, next) => {
+        if (req.path.startsWith('/endpoints') || req.path.startsWith('/auth') || req.path.startsWith('/media')) {
+            return proxy(req, res, next)
+        }
+        next()
+    })
 }
 
 app.use(express.static(join(__dirname, 'dist')))
