@@ -179,6 +179,10 @@ export default function Contact() {
                                 )}
                             </div>
 
+                            {submitError && (
+                                <p className="form-submit-error">{submitError}</p>
+                            )}
+
                             <button
                                 type="submit"
                                 className="submit-btn"
