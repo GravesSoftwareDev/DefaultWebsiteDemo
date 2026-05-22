@@ -1,0 +1,108 @@
+
+.product-cards {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--bg);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.product-cards:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+
+.product-cards-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--code-bg);
+    position: relative;
+}
+
+.product-cards-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.product-cards:hover .product-cards-image img {
+    transform: scale(1.04);
+}
+
+.product-cards-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--border);
+}
+
+.product-cards-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px dashed var(--border);
+    border-radius: 1px;
+    opacity: 0.5;
+}
+
+
+.product-cards-content {
+    padding: 20px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.product-cards-content h2 {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-h);
+    margin: 0 0 8px;
+    line-height: 1.25;
+}
+
+.product-cards-content p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text);
+    margin: 0 0 20px;
+    flex: 1;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-cards-content button {
+    align-self: flex-start;
+    padding: 9px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.product-cards-content button:hover {
+    background: var(--accent-border);
+}
+
+.product-cards-content button:active {
+    transform: scale(0.97);
+}
