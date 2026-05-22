@@ -14,6 +14,7 @@ if (API_URL) {
     const proxy = createProxyMiddleware({
         target: API_URL,
         changeOrigin: true,
+        pathRewrite: { '^': '' },
     })
     app.use('/endpoints', proxy)
     app.use('/auth', proxy)
